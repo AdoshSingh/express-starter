@@ -1,0 +1,24 @@
+version: "3"
+
+build:
+  steps:
+    - type: command
+      name: base_packages
+      command: sudo apt-get update && sudo apt-get install -y curl
+    
+    - type: command
+      name: nodejs_environment
+      command: curl -fsSl https://deb.nodesource.com/setup_21.x | sudo -E bash - && sudo apt-get install -y nodejs
+
+    - type: git-clone
+      name: express_starter
+      url: https://github.com/AdoshSingh/express-starter
+      branch: main
+
+launch:
+  steps: 
+    - type: command
+      name: run_at_startup_install_dependecies
+      command: npm install
+      directory: /home/devzero/express-starter
+      
